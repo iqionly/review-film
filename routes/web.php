@@ -36,6 +36,9 @@ Route::middleware('auth')->group(function () {
     // Page untuk post cast baru
     Route::post('/cast', 'CastController@store');
 
+    // Route untuk export cast
+    Route::get('/cast/export', 'CastController@export');
+
     // Page yang menampilkan semua cast
     Route::get('/cast/{cast_id}', 'CastController@show');
 
@@ -72,7 +75,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/genre/list', 'GenreController@test');
 });
 
+// Film Route in here
 Route::get('/film', 'FilmController@index');
+Route::get('/film/export', 'FilmController@export');
+Route::get('/film/{id}', 'FilmController@show');
 
 // User Controller Route
 Route::get('/user', 'UserController@index');
@@ -81,4 +87,5 @@ Route::post('/user/register', 'UserController@newuser');
 Route::get('/user/login', 'UserController@loginPage')->name('login');
 Route::post('/user/login', 'UserController@signin');
 Route::get('/user/logout', 'UserController@logout')->name('logout');
+
 

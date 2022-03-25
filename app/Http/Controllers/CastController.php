@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CastsExport;
+use App\Exports\FilmExport;
+use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CastController extends Controller
 {
@@ -24,12 +29,18 @@ class CastController extends Controller
             "bio" => $req["bio"]
         ]);
 
-        return redirect('/cast');
+        return redirect('/cast')->withSuccess('Cast Created Successfully');
     }
 
     public function index()
     {
         $casts = DB::table('cast')->get();
+
+        if(session('success'))
+        {
+            Alert::success('Success', session('success'));
+        }
+
         return view('cast.index', compact('casts'));
     }
 
@@ -69,6 +80,16 @@ class CastController extends Controller
         $query = DB::table('cast')
             ->where('id', $id)
             ->delete();
-        return redirect('/cast');
+
+        if($query == true) {
+            return response('Success', 200);
+        } else {
+            return response('Fail', 500);
+        }
+    }
+
+    public function export()
+    {
+        return Excel::download(new CastsExport, 'cast.xlsx');
     }
 }

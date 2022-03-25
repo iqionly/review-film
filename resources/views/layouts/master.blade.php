@@ -43,30 +43,11 @@
             <!-- Main content -->
             <section class="content">
 
-                <!-- Default box -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">@yield('title')</h3>
-
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        @yield('content')
-                    </div>
-                    <!-- /.card-body -->
-                    <div class="card-footer">
-                        
-                    </div>
-                    <!-- /.card-footer-->
+                <div class="container">
+                    @yield('content')
                 </div>
-                <!-- /.card -->
+
+                @stack('modal')
 
             </section>
             <!-- /.content -->
@@ -97,6 +78,8 @@
     <script src="{{ asset('admin/dist/js/adminlte.min.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('admin/dist/js/demo.js') }}"></script>
+
+    @include('sweetalert::alert')
 
     @stack('scripts')
 </body>

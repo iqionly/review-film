@@ -1,9 +1,16 @@
-@extends('layouts.master');
+@extends('layouts.master')
 
 @section('title')
-    Test
+    Dashboard
 @endsection
 
 @section('content')
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates at itaque quaerat corrupti sapiente error odit impedit hic corporis repellat atque iste labore assumenda veniam perspiciatis, ex, molestiae eum architecto.
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Est sunt iste facere doloribus commodi laboriosam ipsum
+        temporibus omnis cupiditate voluptatibus sint optio maxime numquam pariatur, assumenda voluptate suscipit. Velit,
+        perspiciatis.
+    </p>
+    <p>
+        Silahkan untuk register di link berikut: <a href="/register">Form Sign Up</a>
+    </p>
 @endsection
