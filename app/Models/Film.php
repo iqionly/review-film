@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Perans;
 use Illuminate\Database\Eloquent\Model;
 
 class Film extends Model

@@ -10,82 +10,50 @@
         <link rel="stylesheet" href="{{ asset('admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     @endpush
 
-    <body class="hold-transition login-page">
-
-        <div class="login-box">
-            <div class="login-logo">
-                <a href="../../index2.html"><b>Admin</b>LTE</a>
+    <div class="auth-wrapper">
+        <div class="auth-content">
+            <div class="auth-bg">
+                <span class="r"></span>
+                <span class="r s"></span>
+                <span class="r s"></span>
+                <span class="r"></span>
             </div>
-            <!-- /.login-logo -->
-
-            <div class="card">
-                <div class="card-body login-card-body">
-                    <p class="login-box-msg">Sign in to start your session</p>
-
-                    @error('status')
-                        <div class="alert alert-danger">
-                            {{ $message }}
+            <form action="/user/login" method="post">
+                @csrf
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="mb-4">
+                            <i class="feather icon-unlock auth-icon"></i>
                         </div>
-                    @enderror
-
-                    <form action="/user/login" method="post">
-                        @csrf
+                        <h3 class="mb-4">Login</h3>
                         <div class="input-group mb-3">
-                            <input name="email" id="email" type="email" class="form-control" placeholder="Email"
-                                value="{{ old('email') }}">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-envelope"></span>
-                                </div>
-                            </div>
+                            <input name="email" id="email" type="email" class="form-control" placeholder="Email">
                         </div>
                         @error('email')
                             <div class="alert alert-danger">
                                 {{ $message }}
                             </div>
                         @enderror
-                        <div class="input-group mb-3">
-                            <input name="password" id="password" type="password" class="form-control"
-                                placeholder="Password">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-lock"></span>
-                                </div>
-                            </div>
+                        <div class="input-group mb-4">
+                            <input name="password" id="password" type="password" class="form-control" placeholder="password">
                         </div>
                         @error('password')
                             <div class="alert alert-danger">
                                 {{ $message }}
                             </div>
                         @enderror
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="icheck-primary">
-                                    <input type="checkbox" id="remember">
-                                    <label for="remember">
-                                        Remember Me
-                                    </label>
-                                </div>
+                        <div class="form-group text-left">
+                            <div class="checkbox checkbox-fill d-inline">
+                                <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1" checked="">
+                                <label for="checkbox-fill-a1" class="cr"> Save Details</label>
                             </div>
-                            <!-- /.col -->
-                            <div class="col-4">
-                                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-                            </div>
-                            <!-- /.col -->
                         </div>
-                    </form>
-
-                    <p class="mb-1">
-                        <a href="forgot-password.html">I forgot my password</a>
-                    </p>
-                    <p class="mb-0">
-                        <a href="/user/register" class="text-center">Register a new account</a>
-                    </p>
+                        <button class="btn btn-primary shadow-2 mb-4">Login</button>
+                        <p class="mb-2 text-muted">Forgot password? <a href="#">Reset</a></p>
+                        <p class="mb-0 text-muted">Don’t have an account? <a href="/user/register">Signup</a></p>
+                    </div>
                 </div>
-                <!-- /.login-card-body -->
-            </div>
+            </form>
         </div>
-        <!-- /.login-box -->
-
-        {{-- Tag Penutup body ada di blank.blade.php --}}
-    @endsection
+    </div>
+@endsection

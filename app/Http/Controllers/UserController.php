@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -28,7 +29,6 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|unique:users,email|email:dns',
             'password' => 'required',
-            'terms' => 'required',
         ]);
 
         $query = DB::table('users')->insert([
@@ -37,11 +37,16 @@ class UserController extends Controller
             "password" => Hash::make($req["password"]),
         ]);
 
-        return redirect('/user/register');
+        return redirect('/user/login')->with('success', 'Berhasil mebuat akun.');
     }
 
     public function loginPage()
     {
+        if(session('success'))
+        {
+            Alert::success(session('success'));
+        }
+        
         return view('user.login');
     }
 

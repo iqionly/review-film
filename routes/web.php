@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Perans;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -92,5 +93,10 @@ Route::post('/user/register', 'UserController@newuser');
 Route::get('/user/login', 'UserController@loginPage')->name('login');
 Route::post('/user/login', 'UserController@signin');
 Route::get('/user/logout', 'UserController@logout')->name('logout');
+
+// Route::get('/check', function ()
+// {
+//     dd(Perans::find(1)->film); 
+// });
 
 

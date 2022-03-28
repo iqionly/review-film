@@ -1,8 +1,9 @@
-<nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav">
-        <li class="nav-item">
-            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-        </li>
-    </ul>
-</nav>
+<div class="navbar-brand header-logo">
+    <a href="index.html" class="b-brand">
+        <div class="b-bg">
+            <i class="feather icon-trending-up"></i>
+        </div>
+        <span class="b-title">Datta Able</span>
+    </a>
+    <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
+</div>
