@@ -16,9 +16,9 @@ class CreateKritikTable extends Migration
         Schema::create('kritik', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('NO ACTION')->onUpdate('CASCADE');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->unsignedBigInteger('film_id');
-            $table->foreign('film_id')->references('id')->on('film')->onDelete('NO ACTION')->onUpdate('CASCADE');
+            $table->foreign('film_id')->references('id')->on('film')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->text('isi');
             $table->integer('point');
             $table->timestamps();

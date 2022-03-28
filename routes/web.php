@@ -78,7 +78,12 @@ Route::middleware('auth')->group(function () {
 // Film Route in here
 Route::get('/film', 'FilmController@index');
 Route::get('/film/export', 'FilmController@export');
+Route::get('/film/create', 'FilmController@create');
+Route::get('/film/test', 'FilmController@test');
+Route::post('/film', 'FilmController@store');
 Route::get('/film/{id}', 'FilmController@show');
+Route::delete('/film/{id}', 'FilmController@destroy');
+Route::get('/getFilm', 'FilmController@getFilms')->name('film.index'); 
 
 // User Controller Route
 Route::get('/user', 'UserController@index');

@@ -6,9 +6,6 @@
 
 @section('content')
     @push('styles')
-        <!-- DataTables -->
-        <link rel="stylesheet" href="{{ asset('admin/plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}" />
-
         {{-- CSRF META TOKEN --}}
         <meta name="csrf-token" content="{{ csrf_token() }}" />
     @endpush
@@ -40,27 +37,6 @@
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody>
-                    @forelse ($query as $key=>$value)
-                        <tr>
-                            <td>{{ $key + 1 }}</td>
-                            <td>Poster</td>
-                            <td>{{ $value->judul }}</td>
-                            <td>{{ $value->genre->nama }}</td>
-                            <td>{{ $value->tahun }}</td>
-                            <td>
-                                <a onclick="showData('/film/{{ $value->id }}')" class="btn btn-info">Show</a>
-                                <a href="/film/{{ $value->id }}/edit" class="btn btn-primary">Edit</a>
-                                <button type="button" class="btn btn-danger"
-                                    onclick="showModal('/film/{{ $value->id }}')">DELETE</button>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="6">No data</td>
-                        </tr>
-                    @endforelse
-                </tbody>
                 <tfoot>
                     <tr>
                         <th>#</th>
@@ -79,7 +55,47 @@
         <!-- SweetAlert2 -->
         <script src="{{ asset('admin/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
 
+        <!-- Page specific script -->
         <script>
+            $(function() {
+
+                var table = $('#table-film').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    responsive: true,
+                    ordering: false,
+                    ajax: "{{ route('film.index') }}",
+                    columns: [{
+                            data: 'DT_RowIndex',
+                            name: 'DT_RowIndex'
+                        },
+                        {
+                            data: 'judul',
+                            name: 'judul'
+                        },
+                        {
+                            data: 'ringkasan',
+                            name: 'ringkasan'
+                        },
+                        {
+                            data: 'genre',
+                            name: 'genre'
+                        },
+                        {
+                            data: 'tahun',
+                            name: 'tahun'
+                        },
+                        {
+                            data: 'action',
+                            name: 'action',
+                            orderable: true,
+                            searchable: true
+                        },
+                    ],
+                })
+
+            });
+
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
                     confirmButton: 'btn btn-success',
@@ -136,26 +152,6 @@
                     }
                 })
             }
-
-            async function showData(link) {
-                const inputValue = fetch(link)
-                    .then(response => response.json())
-                    .then(data => data[0])
-                    .then((data) => {
-                        Swal.fire(`${data.judul} <i>(${data.tahun})</i> <br>${data.ringkasan}<br>`)
-                })
-            }
-        </script>
-
-        <!-- DataTables  & Plugins -->
-        <script src="{{ asset('admin/plugins/datatables/jquery.dataTables.js') }}"></script>
-        <script src="{{ asset('admin/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
-
-        <!-- Page specific script -->
-        <script>
-            $(function() {
-                $('#table-film').DataTable();
-            });
         </script>
     @endpush
 @endsection

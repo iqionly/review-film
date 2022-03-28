@@ -20,7 +20,7 @@ class CreateFilmTable extends Migration
             $table->integer('tahun');
             $table->string('poster');
             $table->unsignedBigInteger('genre_id');
-            $table->foreign('genre_id')->references('id')->on('genre')->onDelete('NO ACTION')->onUpdate('CASCADE');
+            $table->foreign('genre_id')->references('id')->on('genre')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->timestamps();
         });
     }

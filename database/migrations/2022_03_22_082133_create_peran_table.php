@@ -16,9 +16,9 @@ class CreatePeranTable extends Migration
         Schema::create('peran', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('film_id');
-            $table->foreign('film_id')->references('id')->on('film')->onDelete('NO ACTION')->onUpdate('CASCADE');
+            $table->foreign('film_id')->references('id')->on('film')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->unsignedBigInteger('cast_id');
-            $table->foreign('cast_id')->references('id')->on('cast')->onDelete('NO ACTION')->onUpdate('CASCADE');
+            $table->foreign('cast_id')->references('id')->on('cast')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->string('nama');
             $table->timestamps();
         });

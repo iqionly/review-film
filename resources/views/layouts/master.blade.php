@@ -14,6 +14,12 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('admin/dist/css/adminlte.min.css') }}">
 
+    <script src="{{ asset('vendor/sweetalert/sweetalert.all.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('admin/plugins/datatables/jquery.dataTables.css') }}">
+
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{ asset('admin/plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}" />
+
     @stack('styles')
 </head>
 
@@ -72,12 +78,15 @@
 
     <!-- jQuery -->
     <script src="{{ asset('admin/plugins/jquery/jquery.min.js') }}"></script>
+    <!-- DataTables -->
+    <script src="{{ asset('admin/plugins/datatables/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('admin/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
     <!-- Bootstrap 4 -->
     <script src="{{ asset('admin/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('admin/dist/js/adminlte.min.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="{{ asset('admin/dist/js/demo.js') }}"></script>
+    {{-- <script src="{{ asset('admin/dist/js/demo.js') }}"></script> --}}
 
     @include('sweetalert::alert')
 

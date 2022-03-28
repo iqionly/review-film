@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    List Casts
+    List Genre
 @endsection
 
 @section('content')
@@ -31,11 +31,12 @@
                     <td>{{ $key + 1 }}</td>
                     <td>{{ $value->nama }}</td>
                     <td>
-                        <form action="/genre/{{ $value->id }}" method="post">
-                            <a href="/genre/{{ $value->id }}/edit" class="btn btn-primary">Edit</a>
+
+                        <a href="/genre/{{ $value->id }}/edit" class="btn btn-primary">Edit</a>
+                        <form action="/genre/{{ $value->id }}" method="post" class="d-inline-block">
                             @csrf
                             @method('DELETE')
-                            <input type="submit" class="btn btn-danger" value="DELETE">
+                            <input type="submit" class="btn btn-danger btn-delete" value="DELETE">
                         </form>
                     </td>
                 </tr>
@@ -63,6 +64,42 @@
         <script>
             $(function() {
                 $('#table-genre').DataTable();
+            });
+
+            $('.btn-delete').click(function(event) {
+                var form = $(this).closest("form");
+                var name = $(this).data("name");
+                event.preventDefault();
+                const deleteModal = Swal.mixin({
+                    customClass: {
+                        confirmButton: 'btn btn-success',
+                        cancelButton: 'btn btn-danger'
+                    },
+                    buttonsStyling: false
+                })
+
+                deleteModal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'No, cancel!',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    } else if (
+                        /* Read more about handling dismissals below */
+                        result.dismiss === Swal.DismissReason.cancel
+                    ) {
+                        deleteModal.fire(
+                            'Cancelled',
+                            'Your imaginary file is safe :)',
+                            'error'
+                        )
+                    }
+                })
             });
         </script>
     @endpush

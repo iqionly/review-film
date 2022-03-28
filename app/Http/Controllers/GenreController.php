@@ -5,13 +5,22 @@ namespace App\Http\Controllers;
 use App\Models\Genre;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
+/**
+ * Genre Controller
+ */
 class GenreController extends Controller
 {
-    //
     public function show()
     {
         $genres = DB::table('genre')->get();
+
+        if(session('success'))
+        {
+            Alert::success(session('success'));
+        }
+
         return view('genre.index', compact('genres'));
     }
 
@@ -33,7 +42,7 @@ class GenreController extends Controller
 
         if($query)
         {
-            return redirect('/genre');
+            return redirect('/genre')->withSuccess('Berhasil update data.');
         } else {
             return back()->withErrors(['status' => 'Menyimpan Data Gagal..']);
         }
@@ -42,7 +51,7 @@ class GenreController extends Controller
     public function create(Request $req)
     {
         $validation = $req->validate([
-            'nama' => 'required|min:3',
+            'nama' => 'required|min:3|unique:genre,nama',
         ]);
 
         $query = DB::table('genre')->insert([
@@ -50,9 +59,9 @@ class GenreController extends Controller
         ]);
 
         if($query) {
-            return redirect('/genre')->with('status', 'Berhasil Tersimpan');;
+            return redirect('/genre')->withSuccess('Berhasil tersimpan.');
         } else {
-            return back()->withErrors(['status' => 'Gagal Menyimpan...']);
+            return back()->withErrors(['status' => 'Gagal Menyimpan!']);
         }
     }
 
